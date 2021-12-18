@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  
+</head>
+
+<body>
+ <div class="login">
+	<h1>Predict the likelihood of hotel booking cancellation</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+    	<label for="hotel">Choose a type of hotel:</label>
+        <select name="hotel" id="hotel">
+          <option value="Resort Hotel">Resort Hotel</option>
+          <option value="City Hotel">City Hotel</option>
+        </select>
+        <br><br>
+        
+        <label for="lead_time">Number of days that elapsed between the entering date of the booking into the PMS and the arrival date:</label>
+    	<input type="text" name="lead_time" placeholder="lead_time" required="required" />
+    	<br><br>
+        
+        <label for="arrival_date_month">Year of arrival date:</label>
+        <select name="arrival_date_month" id="arrival_date_month">
+          <option value="January">January</option>
+          <option value="February">February</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August">August</option>
+          <option value="September">September</option>
+          <option value="October">October</option>
+          <option value="November">November</option>
+          <option value="December">December</option>
+        </select>
+        <br><br>
+        
+        <label for="arrival_date_week_number">Week number of year for arrival date:</label>
+    	<input type="text" name="arrival_date_week_number" placeholder="arrival_date_week_number" required="required" />
+    	<br><br>
+        
+        <label for="arrival_date_day_of_month">Day of arrival date:</label>
+    	<input type="text" name="arrival_date_day_of_month" placeholder="arrival_date_day_of_month" required="required" />
+    	<br><br>
+    	
+    	<label for="children">Number of children:</label>
+    	<input type="text" name="children" placeholder="children" required="required" />
+    	<br><br>
+    	
+    	<label for="meal">Type of meal booked:</label>
+        <select name="meal" id="meal">
+          <option value="No Meal">No Meal</option>
+          <option value="Breakfast">Breakfast</option>
+          <option value="Half Board">Half Board</option>
+          <option value="Full Board">Full Board</option>
+        </select>
+        <br><br>
+    	
+    	<label for="country">Country of origin. Categories are represented in the ISO 3155–3:2013 format:</label>
+    	<input type="text" name="country" placeholder="country" required="required" />
+    	<br><br>
+    	
+    	<label for="market_segment">Market segment designation. In categories, the term “TA” means “Travel Agents” and “TO” means “Tour Operators”:</label>
+        <select name="market_segment" id="market_segment">
+          <option value="Complementary">Complementary</option>
+          <option value="Corporate">Corporate</option>
+          <option value="Direct">Direct</option>
+          <option value="Groups">Groups</option>
+          <option value="Offline TA/TO">Offline TA/TO</option>
+          <option value="Online TA">Online TA</option>
+          <option value="Aviation">Aviation</option>
+        </select>
+        <br><br>
+        
+        <label for="distribution_channel">Booking distribution channel. In categories, the term “TA” means “Travel Agents” and “TO” means “Tour Operators”:</label>
+        <select name="distribution_channel" id="distribution_channel">
+          <option value="Corporate">Corporate</option>
+          <option value="Direct">Direct</option>
+          <option value="TA/TO">TA/TO</option>
+          <option value="GDS">GDS</option>
+          <option value="Undefined">Undefined</option>
+        </select>
+        <br><br>
+        
+        <label for="previous_cancellations">Number of previous bookings that were cancelled by the customer prior to the current booking:</label>
+    	<input type="text" name="previous_cancellations" placeholder="previous_cancellations" required="required" />
+    	<br><br>
+    	
+    	<label for="previous_bookings_not_canceled">Number of previous bookings not cancelled by the customer prior to the current booking:</label>
+    	<input type="text" name="previous_bookings_not_canceled" placeholder="previous_bookings_not_canceled" required="required" />
+    	<br><br>
+    	
+    	<label for="deposit_type">Indication on if the customer made a deposit to guarantee the booking:</label>
+        <select name="deposit_type" id="deposit_type">
+          <option value="No Deposit">No Deposit</option>
+          <option value="Non Refund">Non Refund</option>
+          <option value="Refundable">Refundable</option>
+        </select>
+        <br><br>
+        
+        <label for="days_in_waiting_list">Number of days the booking was in the waiting list before it was confirmed to the customer:</label>
+    	<input type="text" name="days_in_waiting_list" placeholder="days_in_waiting_list" required="required" />
+    	<br><br>
+    	
+    	<label for="customer_type">Type of booking:</label>
+        <select name="customer_type" id="customer_type">
+          <option value="Contract">Contract</option>
+          <option value="Group">Group</option>
+          <option value="Transient">Transient</option>
+          <option value="Transient-party">Transient-party</option>
+        </select>
+        <br><br>
+        
+        <label for="adr">Average Daily Rate as defined by dividing the sum of all lodging transactions by the total number of staying nights:</label>
+    	<input type="text" name="adr" placeholder="adr" required="required" />
+    	<br><br>
+        
+        <label for="total_of_special_requests">Number of special requests made by the customer (e.g. twin bed or high floor):</label>
+    	<input type="text" name="total_of_special_requests" placeholder="total_of_special_requests" required="required" />
+    	<br><br>
+        
+        <label for="reservation_status">Reservation last status:</label>
+        <select name="reservation_status" id="reservation_status">
+          <option value="Canceled">Canceled</option>
+          <option value="Check-Out">Check-Out</option>
+          <option value="No-Show">No-Show</option>
+        </select>
+        <br><br>
+        
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+   <br><br>
+   {{ prediction_text }}
+
+ </div>
+
+
+</body>
+</html>
